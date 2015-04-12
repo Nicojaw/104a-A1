@@ -79,68 +79,58 @@ void cpplines (FILE* pipe, char* filename) {
 int main (int argc, char** argv) {
 
 
-  int opts;
-  //int strNum = 0;
-  char bufferr[LINESIZE];
-  string debug;
-  string tmps;
-  string dws;
-  FILE * tmp;
-  FILE * pps;
-  char *fgetsBLP;
-  char *buffs;
-  char *svr;
-  //yy_flex_debug = 0;
+    int opts;
+    //int strNum = 0;
+//    char bufferr[LINESIZE];
+    string debug;
+    string tmps;
+    string dws;
+//    FILE * tmp;
+//    FILE * pps;
+//    char *fgetsBLP;
+//    char *buffs;
+//    char *svr;
+    //yy_flex_debug = 0;
   
 /*Get options. code based off
 gnu.org/software/libc/manual/html_node/Example-of-Getopt.html#Example-of-Getopt
 */
-  while((opts = getopt(argc, argv, "ly:@:D")!=-1)){
-    switch(opts){
+//  printf("test1\n");
+  
+    while((opts = getopt(argc, argv, "ly::@::D"))!=-1){
+ //   printf("test2\n");
+      switch(opts){
     
-      case 'l':
-        //yy_flex_debug = 1;
-        break;
+        case 'l':
+          //yy_flex_debug = 1;
+          printf("case L\n");
+          break;
         
-      case 'y':
-        //yydebug = 1;
-        break;
+        case 'y':
+          //yydebug = 1;
+          printf("case Y\n");
+          break;
         
-      case '@':
-        set_debugflags(optarg);
-        //strNum = 1;
-        break;
+        case '@':
+          set_debugflags(optarg);
+          printf("case @\n");
+          //strNum = 1;
+          break;
         
-      case 'D':
-        debug = optarg;
-        tmp = fopen("test.txt", "w");
-        tmps = "test.txt";
-        fprintf(tmp, "-D");
-        fprintf(tmp, "%s",debug.c_str());
-        dws = CPP+ " " +tmps;
-        pps = popen(dws.c_str(), "r");
-        for(;;){
-          fgetsBLP=fgets(bufferr, LINESIZE, pps);
-          if(fgetsBLP == NULL){
-            break;
-          }
-        }
-        buffs = bufferr;
-        for(int token_ctt = 1;;++token_ctt){
-          char *tokenn = strtok_r(buffs , "\t\n", &svr);
-          buffs = NULL;
-          if(tokenn == NULL){break;}
-          intern_stringset(tokenn);
-        }
-        break;
+        case 'D':
+        //Pass this option and its argument to cpp. 
+        //This is mostly useful as-D__OCLIB_OH__ to suppress inclusion of the code from oclib.oh
+        //when testing a program
+          printf("case -D\n");
+          break;
       
-      default:
-        fprintf(stderr, "Option: [-ly] [-@flag...] [-D string]\n");
-        exit_status = 1;
-        exit(exit_status);        
+        default:
+          fprintf(stderr, "Option: [-ly] [-@flag...] [-D string]\n");
+          exit_status = 1;
+          exit(exit_status);        
+      }
     }
-  }
-  return get_exitstatus();
+    return get_exitstatus();
 }
 
 /*    set_execname (argv[0]);
