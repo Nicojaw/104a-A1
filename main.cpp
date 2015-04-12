@@ -5,6 +5,9 @@
 // Print out each input line read in, then strtok it for
 // tokens.
 
+#include <fstream>
+#include <unordered_set>
+using namespace std;
 #include <unistd.h>
 #include <cstdlib>
 #include <iostream>
@@ -30,7 +33,7 @@ extern int yydebug;
 extern FILE *yyin;
 extern int yylex(void);
 extern int yyparse(void);
-
+extern const char *get_yytname (int symbol);
 
 // Chomp the last character from a buffer if it is delim.
 void chomp (char* string, char delim) {
@@ -73,13 +76,23 @@ void cpplines (FILE* pipe, char* filename) {
 
 int main (int argc, char** argv) {
 
+
+  int opts;
+  //int strNum = 0;
+  char bufferr[LINESIZE];
+  string debug;
+  string tmps;
+  string dws;
+  FILE * tmp;
+  FILE * pps;
+  char *fgetsBLP;
+  char *buffs;
+  char *svr;
+  yy_flex_debug = 0;
+  
 /*Get options. code based off
 gnu.org/software/libc/manual/html_node/Example-of-Getopt.html#Example-of-Getopt
 */
-  int opts;
-  string debug;
-  FILE * inFile;
-  yy_flex_debug = 0;
   while((opts = getopt(argc, argv, "ly:@:D")!=-1)){
     switch(opts){
     
@@ -93,18 +106,40 @@ gnu.org/software/libc/manual/html_node/Example-of-Getopt.html#Example-of-Getopt
         
       case '@':
         set_debugflags(optarg);
+        //strNum = 1;
         break;
         
       case 'D':
         debug = optarg;
-        inFile = fopen("test.txt", "w");
-        
-
-
-
-
-
-
+        tmp = fopen("test.txt", "w");
+        tmps = "test.txt";
+        fprintf(tmp, "-D");
+        fprintf(tmp, "%s",debug.c_str());
+        dws = CPP+ " " +tmps;
+        pps = popen(dws.c_str(), "r");
+        for(;;){
+          fgetsBLP=fgets(bufferr, LINESIZE, pps);
+          if(fgetsBLP == NULL){
+            break;
+          }
+        }
+        buffs = bufferr;
+        for(int token_ctt = 1;;++token_ctt){
+          char *tokenn = strtok_r(buffs , "\t\n", &svr);
+          buffs = NULL;
+          if(tokenn == NULL){break;}
+          intern_stringset(tokenn);
+        }
+        break;
+      
+      default:
+        fprintf(stderr, "Option: [-ly] [-@flag...] [-D string]\n");
+        exit_status = 1;
+        exit(exit_status);        
+    }
+  }
+  return get_exitstatus();
+}
 
 /*    set_execname (argv[0]);
    for (int argi = 1; argi < argc; ++argi) {
@@ -119,9 +154,9 @@ gnu.org/software/libc/manual/html_node/Example-of-Getopt.html#Example-of-Getopt
          int pclose_rc = pclose (pipe);
          eprint_status (command.c_str(), pclose_rc);
       }
-   } */
+   } 
    return get_exitstatus();
 }
-
+*/
 
 
