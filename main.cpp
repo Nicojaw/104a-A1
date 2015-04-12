@@ -130,6 +130,11 @@ gnu.org/software/libc/manual/html_node/Example-of-Getopt.html#Example-of-Getopt
           exit(exit_status);        
       }
     }
+    if (optind>=argc){
+        fprintf(stderr, "Missing expected argument after the Options\n");
+        exit_status=1;
+        exit(exit_status);
+    }
     return get_exitstatus();
 }
 
