@@ -28,12 +28,14 @@ using namespace std;
 const string CPP = "/usr/bin/cpp";
 const size_t LINESIZE = 1024;
 int exit_status = 0;
-extern int yy_flex_debug;
-extern int yydebug;
-extern FILE *yyin;
-extern int yylex(void);
-extern int yyparse(void);
-extern const char *get_yytname (int symbol);
+//extern int yy_flex_debug;
+//extern int yydebug;
+//extern FILE *yyin;
+//extern int yylex(void);
+//extern int yyparse(void);
+//extern const char *get_yytname (int symbol);
+
+
 
 // Chomp the last character from a buffer if it is delim.
 void chomp (char* string, char delim) {
@@ -88,7 +90,7 @@ int main (int argc, char** argv) {
   char *fgetsBLP;
   char *buffs;
   char *svr;
-  yy_flex_debug = 0;
+  //yy_flex_debug = 0;
   
 /*Get options. code based off
 gnu.org/software/libc/manual/html_node/Example-of-Getopt.html#Example-of-Getopt
@@ -97,11 +99,11 @@ gnu.org/software/libc/manual/html_node/Example-of-Getopt.html#Example-of-Getopt
     switch(opts){
     
       case 'l':
-        yy_flex_debug = 1;
+        //yy_flex_debug = 1;
         break;
         
       case 'y':
-        yydebug = 1;
+        //yydebug = 1;
         break;
         
       case '@':
