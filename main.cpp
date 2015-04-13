@@ -75,7 +75,8 @@ void cpplines (FILE* pipe, char* filename) {
 int main (int argc, char** argv) {
 
     int opts;
-    string base; 
+    string base;
+    string strFile;
 /*Get options. code based off
 gnu.org/software/libc/manual/html_node/Example-of-Getopt.html#Example-of-Getopt
 */
@@ -126,7 +127,10 @@ gnu.org/software/libc/manual/html_node/Example-of-Getopt.html#Example-of-Getopt
       char* filename = argv[argi]; 
   
       base = remove_extension(filename);
-      std::cout << "The basename is: " << base <<"\n";      
+      std::cout << "The basename is: " << base <<"\n";
+      strFile = base+".str";
+      std::cout << "The new file name is: " << strFile << "\n";
+          
       
       string command = CPP + " " + filename;
       printf ("command=\"%s\"\n", command.c_str());
