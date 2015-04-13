@@ -26,7 +26,12 @@ const string CPP = "/usr/bin/cpp";
 const size_t LINESIZE = 1024;
 int exit_status = 0;
 
-
+//remove the .oc file extention
+std::string remove_extension(const std::string& filename) {
+    size_t lastdot = filename.find_last_of(".");
+    if (lastdot == std::string::npos) return filename;
+    return filename.substr(0, lastdot); 
+}
 
 // Chomp the last character from a buffer if it is delim.
 void chomp (char* string, char delim) {
@@ -70,6 +75,7 @@ void cpplines (FILE* pipe, char* filename) {
 int main (int argc, char** argv) {
 
     int opts;
+    string base; 
 /*Get options. code based off
 gnu.org/software/libc/manual/html_node/Example-of-Getopt.html#Example-of-Getopt
 */
@@ -117,7 +123,11 @@ gnu.org/software/libc/manual/html_node/Example-of-Getopt.html#Example-of-Getopt
 
     set_execname (argv[0]);
    for (int argi = 1; argi < argc; ++argi) {
-      char* filename = argv[argi];
+      char* filename = argv[argi]; 
+  
+      base = remove_extension(filename);
+      std::cout << "The basename is: " << base <<"\n";      
+      
       string command = CPP + " " + filename;
       printf ("command=\"%s\"\n", command.c_str());
       FILE* pipe = popen (command.c_str(), "r");
