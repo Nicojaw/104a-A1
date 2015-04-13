@@ -5,13 +5,10 @@
 // Print out each input line read in, then strtok it for
 // tokens.
 
-#include <fstream>
-#include <unordered_set>
-using namespace std;
+
+
 #include <unistd.h>
-#include <cstdlib>
 #include <iostream>
-#include <vector>
 #include <errno.h>
 #include <libgen.h>
 #include <stdio.h>
@@ -28,12 +25,6 @@ using namespace std;
 const string CPP = "/usr/bin/cpp";
 const size_t LINESIZE = 1024;
 int exit_status = 0;
-//extern int yy_flex_debug;
-//extern int yydebug;
-//extern FILE *yyin;
-//extern int yylex(void);
-//extern int yyparse(void);
-//extern const char *get_yytname (int symbol);
 
 
 
@@ -79,18 +70,6 @@ void cpplines (FILE* pipe, char* filename) {
 int main (int argc, char** argv) {
 
     int opts;
-    //int strNum = 0;
-//    char bufferr[LINESIZE];
-    string debug;
-    string tmps;
-    string dws;
-//    FILE * tmp;
-//    FILE * pps;
-//    char *fgetsBLP;
-//    char *buffs;
-//    char *svr;
-    //yy_flex_debug = 0;
-  
 /*Get options. code based off
 gnu.org/software/libc/manual/html_node/Example-of-Getopt.html#Example-of-Getopt
 */
@@ -102,18 +81,17 @@ gnu.org/software/libc/manual/html_node/Example-of-Getopt.html#Example-of-Getopt
     
         case 'l':
           //yy_flex_debug = 1;
-          printf("case L\n");
+          printf("case -L\n");
           break;
         
         case 'y':
           //yydebug = 1;
-          printf("case Y\n");
+          printf("case -Y\n");
           break;
         
         case '@':
           set_debugflags(optarg);
-          printf("case @\n");
-          //strNum = 1;
+          printf("case -@\n");
           break;
         
         case 'D':
@@ -134,10 +112,10 @@ gnu.org/software/libc/manual/html_node/Example-of-Getopt.html#Example-of-Getopt
         exit_status=1;
         exit(exit_status);
     }
-    return get_exitstatus();
-}
 
-/*    set_execname (argv[0]);
+
+
+    set_execname (argv[0]);
    for (int argi = 1; argi < argc; ++argi) {
       char* filename = argv[argi];
       string command = CPP + " " + filename;
@@ -153,6 +131,6 @@ gnu.org/software/libc/manual/html_node/Example-of-Getopt.html#Example-of-Getopt
    } 
    return get_exitstatus();
 }
-*/
+
 
 
