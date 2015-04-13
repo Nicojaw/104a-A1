@@ -1,5 +1,5 @@
-//Nico Williams
-//nijowill
+//Nico Williams and Brandon Rullamas
+//nijowill and brullama
 //Assignment 1 - String Set and PreProcessor
 // Use cpp to scan a file and print line numbers.
 // Print out each input line read in, then strtok it for
@@ -77,7 +77,6 @@ void cpplines (FILE* pipe, char* filename) {
 }
 
 int main (int argc, char** argv) {
-
 
     int opts;
     //int strNum = 0;
