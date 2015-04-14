@@ -160,7 +160,6 @@ gnu.org/software/libc/manual/html_node/Example-of-Getopt.html#Example-of-Getopt
    dump_stringset(outFile);
    return get_exitstatus();
 }
-}
 
 
 
