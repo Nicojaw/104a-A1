@@ -1,3 +1,7 @@
+#Nico Williams and Brandon Rullamas
+#nijowill and brullama
+#Assignment 1 - String Set and PreProcessor
+
 GCC        = g++ -g -O0 -Wall -Wextra -std=gnu++11
 MKDEP      = g++ -MM -std=gnu++11
 VALGRIND   = valgrind --leak-check=full --show-reachable=yes

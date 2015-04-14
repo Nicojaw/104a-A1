@@ -1,5 +1,5 @@
-//Nico Williams
-//nijowill
+//Nico Williams and Brandon Rullamas
+//nijowill and brullama
 //Assignment 1 - String Set and PreProcessor
 
 #ifndef __STRINGSET__

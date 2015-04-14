@@ -1,3 +1,6 @@
+//Nico Williams and Brandon Rullamas
+//nijowill and brullama
+//Assignment 1 - String Set and PreProcessor
 #ifndef __AUXLIB_H__
 #define __AUXLIB_H__
 

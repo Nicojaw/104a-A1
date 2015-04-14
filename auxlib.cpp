@@ -1,4 +1,6 @@
-  
+//Nico Williams and Brandon Rullamas
+//nijowill and brullama
+//Assignment 1 - String Set and PreProcessor  
 #include <assert.h>
 #include <errno.h>
 #include <libgen.h>
