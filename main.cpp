@@ -71,6 +71,8 @@ int main (int argc, char** argv) {
     int opts;
     string base;
     string strFile;
+    //int yy_flex_debug = 0;
+    //int yydebug = 0;
 /*Get options. code based off
 gnu.org/software/libc/manual/html_node/Example-of-Getopt.html#Example-of-Getopt
 */
@@ -82,24 +84,32 @@ gnu.org/software/libc/manual/html_node/Example-of-Getopt.html#Example-of-Getopt
     
         case 'l':
           //yy_flex_debug = 1;
-          printf("case -L\n");
+//          printf("case -L\n");
           break;
         
         case 'y':
           //yydebug = 1;
-          printf("case -Y\n");
+ //         printf("case -Y\n");
           break;
         
         case '@':
+          if (optarg == NULL){
+            fprintf(stderr, "Please use an appropiate debug flag, such as DEBUGF or DEBUGSTMT.\n");
+            fprintf(stderr, "Option: [-ly] [-@flag...] [-D string]\n");
+            exit_status = 1;
+            exit(exit_status);
+          }
+          //printf(optarg);
+          //printf("\n");
           set_debugflags(optarg);
-          printf("case -@\n");
+          //printf("case -@\n");
           break;
         
         case 'D':
         //Pass this option and its argument to cpp. 
         //This is mostly useful as-D__OCLIB_OH__ to suppress inclusion of the code from oclib.oh
         //when testing a program
-          printf("case -D\n");
+          //printf("case -D\n");
           break;
       
         default:
@@ -117,17 +127,16 @@ gnu.org/software/libc/manual/html_node/Example-of-Getopt.html#Example-of-Getopt
 
     FILE * outFile;
     set_execname (argv[0]);
-   for (int argi = 1; argi < argc; ++argi) {
-      char* filename = argv[argi]; 
-  
+  // for (int argi = 1; argi < argc; ++argi) {
+      char* filename = argv[optind]; 
+      printf("filename is %s\n",filename);
       base = remove_extension(filename);
-      std::cout << "The basename is: " << base <<"\n";
-      strFile = base+".str";
-      std::cout << "The new file name is: " << strFile << "\n";
-          
       
+//      std::cout << "The basename is: " << base <<"\n";
+      strFile = base+".str";
+//      std::cout << "The new file name is: " << strFile << "\n";    
       string command = CPP + " " + filename;
-      printf ("command=\"%s\"\n", command.c_str());
+//      printf ("command=\"%s\"\n", command.c_str());
       FILE* pipe = popen (command.c_str(), "r");
       if (pipe == NULL) {
          syserrprintf (command.c_str());
@@ -136,7 +145,7 @@ gnu.org/software/libc/manual/html_node/Example-of-Getopt.html#Example-of-Getopt
          int pclose_rc = pclose (pipe);
          eprint_status (command.c_str(), pclose_rc);
       }
-   } 
+  // } 
    outFile = fopen(strFile.c_str(),"w");
    dump_stringset(outFile);
    return get_exitstatus();
