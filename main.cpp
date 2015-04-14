@@ -71,6 +71,8 @@ int main (int argc, char** argv) {
     int opts;
     string base;
     string strFile;
+	int Dopts = 0;
+	int Dargs = 0;
     //int yy_flex_debug = 0;
     //int yydebug = 0;
 /*Get options. code based off
@@ -110,6 +112,8 @@ gnu.org/software/libc/manual/html_node/Example-of-Getopt.html#Example-of-Getopt
         //This is mostly useful as-D__OCLIB_OH__ to suppress inclusion of the code from oclib.oh
         //when testing a program
           //printf("case -D\n");
+		  Dopts = 1;
+		  Dargs = optind - 1;
           break;
       
         default:
@@ -134,8 +138,14 @@ gnu.org/software/libc/manual/html_node/Example-of-Getopt.html#Example-of-Getopt
       
 //      std::cout << "The basename is: " << base <<"\n";
       strFile = base+".str";
-//      std::cout << "The new file name is: " << strFile << "\n";    
-      string command = CPP + " " + filename;
+//      std::cout << "The new file name is: " << strFile << "\n";  
+
+	  string command;
+	  if (Dopts) {
+		command = CPP + " " + argv[Dargs] + " " + filename;
+	  } else {
+		command = CPP + " " + filename;
+	  }  
 //      printf ("command=\"%s\"\n", command.c_str());
       FILE* pipe = popen (command.c_str(), "r");
       if (pipe == NULL) {
@@ -149,6 +159,7 @@ gnu.org/software/libc/manual/html_node/Example-of-Getopt.html#Example-of-Getopt
    outFile = fopen(strFile.c_str(),"w");
    dump_stringset(outFile);
    return get_exitstatus();
+}
 }
 
 
