@@ -145,7 +145,7 @@ gnu.org/software/libc/manual/html_node/Example-of-Getopt.html#Example-of-Getopt
          int pclose_rc = pclose (pipe);
          eprint_status (command.c_str(), pclose_rc);
       }
-  // } 
+   } 
    outFile = fopen(strFile.c_str(),"w");
    dump_stringset(outFile);
    return get_exitstatus();
