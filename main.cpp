@@ -4,9 +4,7 @@
 // Use cpp to scan a file and print line numbers.
 // Print out each input line read in, then strtok it for
 // tokens.
-
-
-
+#include <fstream>
 #include <unistd.h>
 #include <iostream>
 #include <errno.h>
@@ -117,7 +115,7 @@ gnu.org/software/libc/manual/html_node/Example-of-Getopt.html#Example-of-Getopt
     }
 
 
-
+    FILE * outFile;
     set_execname (argv[0]);
    for (int argi = 1; argi < argc; ++argi) {
       char* filename = argv[argi]; 
@@ -139,6 +137,8 @@ gnu.org/software/libc/manual/html_node/Example-of-Getopt.html#Example-of-Getopt
          eprint_status (command.c_str(), pclose_rc);
       }
    } 
+   outFile = fopen(strFile.c_str(),"w");
+   dump_stringset(outFile);
    return get_exitstatus();
 }
 
