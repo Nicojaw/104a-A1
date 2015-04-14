@@ -112,6 +112,8 @@ gnu.org/software/libc/manual/html_node/Example-of-Getopt.html#Example-of-Getopt
         //This is mostly useful as-D__OCLIB_OH__ to suppress inclusion of the code from oclib.oh
         //when testing a program
           //printf("case -D\n");
+		  Dopts = 1;
+		  Dargs = optind - 1;
           break;
       
         default:
@@ -138,11 +140,11 @@ gnu.org/software/libc/manual/html_node/Example-of-Getopt.html#Example-of-Getopt
       strFile = base+".str";
 //      std::cout << "The new file name is: " << strFile << "\n";  
 
-	  string actualCom;
+	  string command;
 	  if (Dopts) {
-		actualCom = CPP + " " + argv[Dargs] + " " + filename;
+		command = CPP + " " + argv[Dargs] + " " + filename;
 	  } else {
-		actualCom = CPP + " " + filename;
+		command = CPP + " " + filename;
 	  }  
 //      printf ("command=\"%s\"\n", command.c_str());
       FILE* pipe = popen (command.c_str(), "r");
@@ -157,6 +159,7 @@ gnu.org/software/libc/manual/html_node/Example-of-Getopt.html#Example-of-Getopt
    outFile = fopen(strFile.c_str(),"w");
    dump_stringset(outFile);
    return get_exitstatus();
+}
 }
 
 
