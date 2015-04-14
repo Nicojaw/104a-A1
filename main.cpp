@@ -71,6 +71,8 @@ int main (int argc, char** argv) {
     int opts;
     string base;
     string strFile;
+	int Dopts = 0;
+	int Dargs = 0;
     //int yy_flex_debug = 0;
     //int yydebug = 0;
 /*Get options. code based off
@@ -134,8 +136,14 @@ gnu.org/software/libc/manual/html_node/Example-of-Getopt.html#Example-of-Getopt
       
 //      std::cout << "The basename is: " << base <<"\n";
       strFile = base+".str";
-//      std::cout << "The new file name is: " << strFile << "\n";    
-      string command = CPP + " " + filename;
+//      std::cout << "The new file name is: " << strFile << "\n";  
+
+	  string actualCom;
+	  if (Dopts) {
+		actualCom = CPP + " " + argv[Dargs] + " " + filename;
+	  } else {
+		actualCom = CPP + " " + filename;
+	  }  
 //      printf ("command=\"%s\"\n", command.c_str());
       FILE* pipe = popen (command.c_str(), "r");
       if (pipe == NULL) {
