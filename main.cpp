@@ -127,9 +127,9 @@ gnu.org/software/libc/manual/html_node/Example-of-Getopt.html#Example-of-Getopt
 
     FILE * outFile;
     set_execname (argv[0]);
-  // for (int argi = 1; argi < argc; ++argi) {
-      char* filename = argv[optind]; 
-      printf("filename is %s\n",filename);
+    
+   for (int argi = optind; argi < argc; ++argi) {
+      char* filename = argv[argi]; 
       base = remove_extension(filename);
       
 //      std::cout << "The basename is: " << base <<"\n";
